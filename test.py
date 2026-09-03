@@ -22,6 +22,13 @@ global mouse_hand
 mouse_hand = 0
 global util_hand
 util_hand = None
+global lock
+lock = threading.Lock()
+
+global mouse_avg
+mouse_avg = []
+global last_pointer
+last_pointer = [0, 0]
 
 #thumb_tip = hand.hand_landmarks[0][4]
 #index_tip = hand.hand_landmarks[0][8]
@@ -30,23 +37,29 @@ util_hand = None
 #pinky_tip = hand.hand_landmarks[0][20]
 
 
-def calc(ges, thumb, index, middle, ring, pinky, world, landmarks, handedness, full_ges):
-    calc.password(ges, thumb, index, middle, ring, pinky)
-    calc.hand_choice(full_ges)
+def calcy(ges, thumb, index, middle, ring, pinky, world, landmarks, handedness, full_ges):
+    global t
+    global open_init
+    global init_code
+    global mouse_hand
+    global util_hand
+    global last_pointer
+    global mouse_avg
+    global lock
+
+    open_init, init_code = calc.password(ges, thumb, index, middle, ring, pinky, init_code)
+    mouse_hand, util_hand = calc.hand_choice(full_ges)
     if open_init[0]:
         palm = calc.detect_palm(handedness, world)
-        calc.mouse_control(ges, thumb, index, middle, ring, pinky, world, landmarks, palm, full_ges)
+        last_pointer, mouse_avg, lock = calc.mouse_control(ges, thumb, index, middle, ring, pinky, world, landmarks, palm, full_ges, last_pointer, mouse_avg, lock)
 
 def call(ges, mp_image: mp.Image, timestamp_ms: int):
     global t
     global open_init
-    open_init = calc.open_init
     global init_code
-    init_code = calc.init_code
     global mouse_hand
-    mouse_hand = calc.mouse_hand
     global util_hand
-    util_hand = calc.util_hand
+    global lock
 
     image_np = mp_image.numpy_view()
     frame = cv2.cvtColor(image_np, cv2.COLOR_BGR2RGB)
@@ -82,7 +95,7 @@ def call(ges, mp_image: mp.Image, timestamp_ms: int):
         # print(hand.hand_landmarks[0])
         # print(init_code)
         # print(open_init)
-        calc(ges.gestures[mouse_hand][0].category_name, thumb_tip, index_tip, middle_tip, ring_tip, pinky_tip,
+        calcy(ges.gestures[mouse_hand][0].category_name, thumb_tip, index_tip, middle_tip, ring_tip, pinky_tip,
          hand_world, hand.hand_world_landmarks[mouse_hand], ges.handedness, ges)
 
     except Exception as e:

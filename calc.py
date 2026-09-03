@@ -36,9 +36,16 @@ lock = threading.Lock()
 #ring_tip = hand.hand_landmarks[0][16]
 #pinky_tip = hand.hand_landmarks[0][20]
 
-def mouse_control(ges, thumb, index, middle, ring, pinky, world, landmarks, palm,full_ges):
+def mouse_control(ges, thumb, index, middle, ring, pinky, world, landmarks, palm,full_ges, last_pointer2, mouse_avg2, lock2):
     global mouse_Down
     global last_pointer
+    last_pointer = last_pointer2
+    global mouse_avg
+    global lock
+    lock = lock2
+    mouse_avg = mouse_avg2
+
+
     width, height = pyautogui.size()
     index_to_middle = distance_3d(world[8].x, world[8].y, world[8].z, world[12].x, world[12].y, world[12].z)
     index_to_middle_1 = distance_3d(world[5].x,world[5].y,world[5].z,world[9].x,world[9].y,world[9].z)
@@ -46,7 +53,7 @@ def mouse_control(ges, thumb, index, middle, ring, pinky, world, landmarks, palm
     index_to_middle_3 = distance_3d(world[7].x, world[7].y, world[7].z, world[7].x, world[11].y,world[11].z)
     avg = (index_to_middle_1+(2*index_to_middle_2)+(3*index_to_middle_3)+(6*index_to_middle)) / 12
     #print(avg)
-    if avg <= .025 and ges != "Victory" and ges != "Closed_Fist" and palm:
+    if avg <= .024 and ges != "Victory" and ges != "Closed_Fist" and palm:
         x_diff = abs(last_pointer[0] - index.x)
         y_diff = abs(last_pointer[1] - index.y)
         x = ((last_pointer[0]- index.x) * width)
@@ -56,10 +63,7 @@ def mouse_control(ges, thumb, index, middle, ring, pinky, world, landmarks, palm
         else:
             buffer = False
 
-        c = threading.Thread(target=thread_lock,
-                             args=([x, y], (x_diff+y_diff)/2, full_ges))
-
-        c.start()
+        mouse_avg = mouse_calc([x, y], (x_diff+y_diff)/2, full_ges, mouse_avg2)
 
     index_mid = world[6]
     thumb_world = world[4]
@@ -72,6 +76,7 @@ def mouse_control(ges, thumb, index, middle, ring, pinky, world, landmarks, palm
     last_pointer = [index.x, index.y]
 
     mouse_Down += 1
+    return last_pointer, mouse_avg, lock
 
 def distance_2d(x,y,a,b):
     xx = (x-a)*(x-a)
@@ -79,8 +84,9 @@ def distance_2d(x,y,a,b):
     distance = math.sqrt(xx+yy)
     return distance
 
-def mouse_calc(new_pos, buffer, full_ges):
+def mouse_calc(new_pos, buffer, full_ges, mouse_avg2):
     global mouse_avg
+    mouse_avg = mouse_avg2
     hand_choice(full_ges)
     x = new_pos[0]
     y = new_pos[1]
@@ -118,7 +124,15 @@ def mouse_calc(new_pos, buffer, full_ges):
             v = 5
         x = v * x
         y = v * y
-        pyautogui.move(int(x), int(y), duration=d, tween=pyautogui.easeOutQuad, _pause=False)
+
+        c = threading.Thread(target=thread_lock,
+                             args=(x, y, d))
+
+        c.start()
+    return mouse_avg
+
+def move_mouse(x, y, d):
+    pyautogui.move(int(x), int(y), duration=d, tween=pyautogui.easeOutQuad, _pause=False)
 
 def distance_3d(x,y,z,a,b,c):
 
@@ -144,6 +158,7 @@ def hand_choice(full_ges):
             util_hand = 0
 
     #s.gestures[mouse_hand]) + " " + str(util_hand))
+    return[mouse_hand, util_hand]
 
 def detect_palm(handedness, world):
     global mouse_hand
@@ -185,8 +200,9 @@ def detect_palm(handedness, world):
         return False
 
 
-def password(ges, thumb, index, middle, ring, pinky):
+def password(ges, thumb, index, middle, ring, pinky, init_code2):
     global init_code
+    init_code = init_code2
 
     unlock_num = 3
     max_num = 7
@@ -221,7 +237,8 @@ def password(ges, thumb, index, middle, ring, pinky):
             open_init[0] = False
         else:
             open_init[0] = True
+    return open_init, init_code
 
 def thread_lock(*args):
     with lock:
-        mouse_calc(*args)
+        move_mouse(*args)

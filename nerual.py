@@ -9,6 +9,7 @@ import sys
 import traceback
 import threading
 import calc
+import win32api
 pyautogui.FAILSAFE = False
 pyautogui.PAUSE = .01
 
@@ -46,7 +47,6 @@ def calcy(ges, thumb, index, middle, ring, pinky, world, landmarks, handedness, 
     global last_pointer
     global mouse_avg
     global lock
-
     open_init, init_code = calc.password(ges, thumb, index, middle, ring, pinky, init_code)
     mouse_hand, util_hand = calc.hand_choice(full_ges)
     if open_init[0]:

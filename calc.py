@@ -8,6 +8,7 @@ import math
 import sys
 import traceback
 import threading
+import win32api
 pyautogui.FAILSAFE = False
 pyautogui.PAUSE = .01
 
@@ -53,7 +54,7 @@ def mouse_control(ges, thumb, index, middle, ring, pinky, world, landmarks, palm
     index_to_middle_3 = distance_3d(world[7].x, world[7].y, world[7].z, world[7].x, world[11].y,world[11].z)
     avg = (index_to_middle_1+(2*index_to_middle_2)+(3*index_to_middle_3)+(6*index_to_middle)) / 12
     #print(avg)
-    if avg <= .024 and ges != "Victory" and ges != "Closed_Fist" and palm:
+    if avg <= .025 and ges != "Victory" and ges != "Closed_Fist" and palm:
         x_diff = abs(last_pointer[0] - index.x)
         y_diff = abs(last_pointer[1] - index.y)
         x = ((last_pointer[0]- index.x) * width)
@@ -63,15 +64,22 @@ def mouse_control(ges, thumb, index, middle, ring, pinky, world, landmarks, palm
         else:
             buffer = False
 
+
         mouse_avg = mouse_calc([x, y], (x_diff+y_diff)/2, full_ges, mouse_avg2)
 
     index_mid = world[6]
     thumb_world = world[4]
-    thumb_to_index = distance_3d(thumb_world.x, thumb_world.y, thumb_world.z, index_mid.x, index_mid.y, index_mid.z)
+    thumb_to_index = distance_2d(thumb_world.x, thumb_world.y, index_mid.x, index_mid.y,)
     #print(thumb_to_index)
-    if thumb_to_index <= .03  and mouse_Down >= 20 and palm:
+    scaled_d = size_scale(world)
+    print(thumb_to_index)
+    if thumb_to_index <= .008*scaled_d  and mouse_Down >= 5 and palm and win32api.GetKeyState(0x01)>=0:
         mouse_Down = 0
-        pyautogui.click(button="left")
+        pyautogui.mouseDown(button="left")
+
+    elif thumb_to_index > .012*scaled_d and palm and win32api.GetKeyState(0x01)<0:
+        mouse_Down = 0
+        pyautogui.mouseUp(button="left")
 
     last_pointer = [index.x, index.y]
 
@@ -83,6 +91,12 @@ def distance_2d(x,y,a,b):
     yy = (y-b)*(y-b)
     distance = math.sqrt(xx+yy)
     return distance
+
+def size_scale(world):
+    pinky_point = world[17]
+    wrist_point = world[0]
+    d = distance_3d(pinky_point.x, pinky_point.y, pinky_point.z, wrist_point.x, wrist_point.y, wrist_point.z)
+    return .09/d
 
 def mouse_calc(new_pos, buffer, full_ges, mouse_avg2):
     global mouse_avg

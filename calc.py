@@ -77,7 +77,7 @@ def mouse_control(ges, thumb, index, middle, ring, pinky, world, landmarks, palm
         mouse_Down = 0
         pyautogui.mouseDown(button="left")
 
-    elif thumb_to_index > .012*scaled_d and palm and win32api.GetKeyState(0x01)<0:
+    elif thumb_to_index > .01*scaled_d and palm and win32api.GetKeyState(0x01)<0:
         mouse_Down = 0
         pyautogui.mouseUp(button="left")
 

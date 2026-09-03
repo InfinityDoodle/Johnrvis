@@ -8,6 +8,9 @@ import math
 import sys
 import traceback
 import threading
+
+from mediapipe.tasks.python.vision.face_landmarker import FaceLandmarkerResult
+
 import calc
 import win32api
 pyautogui.FAILSAFE = False
@@ -25,6 +28,8 @@ global util_hand
 util_hand = None
 global lock
 lock = threading.Lock()
+global draw_face_landmarks
+draw_face_landmarks = []
 
 global mouse_avg
 mouse_avg = []
@@ -111,6 +116,15 @@ def call(ges, mp_image: mp.Image, timestamp_ms: int):
         print(f"Error: '{e}' occurred on line {line_number}")
 
     if open_init[0]:
+
+        try:
+            eye_landmarks = []
+            for x in draw_face_landmarks[0][468:477]:
+                eye_landmarks.append(x)
+            mp.tasks.vision.drawing_utils.draw_landmarks(frame, eye_landmarks)
+        except Exception as e:
+            pass
+
         frame = cv2.flip(frame, 1)
         cv2.namedWindow("John", cv2.WINDOW_NORMAL)
         cv2.setWindowProperty("John", cv2.WND_PROP_TOPMOST, 1)
@@ -123,17 +137,39 @@ def call(ges, mp_image: mp.Image, timestamp_ms: int):
     else:
         cv2.destroyAllWindows()
 
+def call_face(face: FaceLandmarkerResult, mp_image: mp.Image, timestamp_ms: int):
+    #print(face)
+    global draw_face_landmarks
+
+    # LEFT IRIS (Indices 468 - 472)
+    # 468: Left Eye Pupil / Iris Center
+    # 469: Left Iris Inner / Right Boundary (towards the nose)
+    # 470: Left Iris Upper / Top Boundary
+    # 471: Left Iris Outer / Left Boundary (towards the temple)
+    # 472: Left Iris Lower / Bottom Boundary
+
+    # RIGHT IRIS (Indices 473 - 477)
+    # 473: Right Eye Pupil / Iris Center
+    # 474: Right Iris Inner / Left Boundary (towards the nose)
+    # 475: Right Iris Upper / Top Boundary
+    # 476: Right Iris Outer / Right Boundary (towards the temple)
+    # 477: Right Iris Lower / Bottom Boundary
+
+    draw_face_landmarks = face.face_landmarks
+
+
 def track():
     global open_init
     BaseOptions = mp.tasks.BaseOptions
     GestureRecognizer = mp.tasks.vision.GestureRecognizer
     GestureRecognizerOptions = mp.tasks.vision.GestureRecognizerOptions
+    FaceDetectorLandMark = mp.tasks.vision.FaceLandmarker
+    FaceLandMarkOptions = mp.tasks.vision.FaceLandmarkerOptions
     VisionRunningMode = mp.tasks.vision.RunningMode
-    mp_drawing = mp.tasks.vision.drawing_utils
 
 
-    ges_path = r"C:\Users\jgdiv\PyCharmMiscProject\net\gesture_recognizer.task"
-    hand_path = r"C:\Users\jgdiv\PyCharmMiscProject\net\hand_landmarker.task"
+    ges_path = r"C:\Users\jgdiv\PyCharmMiscProject\net\weights\gesture_recognizer.task"
+    face_path = r"C:\Users\jgdiv\PyCharmMiscProject\net\weights\face_landmarker.task"
 
     ges_options = GestureRecognizerOptions(
         base_options=BaseOptions(model_asset_path=ges_path),
@@ -141,31 +177,44 @@ def track():
         min_hand_detection_confidence=.6,
         min_hand_presence_confidence=.6,
         min_tracking_confidence=.6, result_callback=call)
+
+    face_options = FaceLandMarkOptions(
+        base_options=BaseOptions(model_asset_path=face_path),
+        running_mode=VisionRunningMode.LIVE_STREAM,
+        min_tracking_confidence=.6,
+        min_face_detection_confidence=.6,
+        min_face_presence_confidence=.6,
+        result_callback=call_face,
+        num_faces=1)
+
     cap = cv2.VideoCapture(0)
     time_stamp = 0
     with GestureRecognizer.create_from_options(ges_options) as recognizer:
-        global util_hand
-        global mouse_hand
-        while True:
-            ret, frame = cap.read()
-            if not ret:
-                print("Video capture failed")
-                break
+        with FaceDetectorLandMark.create_from_options(face_options) as detector:
+            global util_hand
+            global mouse_hand
+            while True:
+                ret, frame = cap.read()
+                if not ret:
+                    print("Video capture failed")
+                    break
 
 
-            rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb_frame)
-            time_stamp = int(time.time()*100)
-            recognizer.recognize_async(mp_image, time_stamp)
-            if open_init[0]:
-                time.sleep(1/25)
-            else:
-                time.sleep(1/5)
+                rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb_frame)
+                time_stamp = int(time.time()*100)
+                recognizer.recognize_async(mp_image, time_stamp)
+                detector.detect_async(mp_image, time_stamp)
+                if open_init[0]:
+                    time.sleep(1/25)
+                else:
+                    time.sleep(1/5)
 
-    cap.release()
-    cv2.destroyAllWindows()
+        cap.release()
+        cv2.destroyAllWindows()
 
-track()
+if __name__ == '__main__':
+    track()
 
 if False:
 

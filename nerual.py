@@ -8,8 +8,12 @@ import math
 import sys
 import traceback
 import threading
-
+import calc_left
+import win32api
+import audio_synth
 from mediapipe.tasks.python.vision.face_landmarker import FaceLandmarkerResult
+from multiprocessing import Process, Event, Queue
+import asyncio
 
 import calc
 import win32api
@@ -30,11 +34,19 @@ global lock
 lock = threading.Lock()
 global draw_face_landmarks
 draw_face_landmarks = []
-
+global gemma_opened
+gemma_opened = False
 global mouse_avg
 mouse_avg = []
 global last_pointer
 last_pointer = [0, 0]
+import atexit
+
+def cleanup():
+    clean = threading.Thread(target=calc_left.close_gemma)
+    clean.start()
+
+atexit.register(cleanup)
 
 #thumb_tip = hand.hand_landmarks[0][4]
 #index_tip = hand.hand_landmarks[0][8]
@@ -52,11 +64,39 @@ def calcy(ges, thumb, index, middle, ring, pinky, world, landmarks, handedness, 
     global last_pointer
     global mouse_avg
     global lock
+    global gemma_opened
+
+    if not gemma_opened and open_init[0]:
+        gemma_opened = True
+        gemma = threading.Thread(target=calc_left.start_gemma)
+        gemma.start()
+    if gemma_opened and not open_init[0]:
+        gemma_opened = False
+        gemma = threading.Thread(target=calc_left.close_gemma)
+        gemma.start()
+
     open_init, init_code = calc.password(ges, thumb, index, middle, ring, pinky, init_code)
     mouse_hand, util_hand = calc.hand_choice(full_ges)
     if open_init[0]:
         palm = calc.detect_palm(handedness, world)
         last_pointer, mouse_avg, lock = calc.mouse_control(ges, thumb, index, middle, ring, pinky, world, landmarks, palm, full_ges, last_pointer, mouse_avg, lock)
+
+def calca(landmarks, world, full_ges):
+    palm_left = calc.detect_palm(None, world, util_hand)
+    palm_right = calc.detect_palm(None, full_ges.hand_world_landmarks[mouse_hand], mouse_hand)
+    toolkit_init = calc_left.toolkit_active(full_ges.hand_world_landmarks[mouse_hand])
+    if palm_left and toolkit_init and palm_right:
+        finger_option = calc_left.pick_tool(world)
+        if finger_option == "index":
+            print("speak")
+            speak_thread = threading.Thread(calc_left.speak())
+            speak_thread.start()
+        elif finger_option == "middle":
+            pass
+        if finger_option == "ring":
+            calc_left.right_click("down")
+        elif win32api.GetKeyState(0x02)<0:
+            calc_left.right_click("up")
 
 def call(ges, mp_image: mp.Image, timestamp_ms: int):
     global t
@@ -102,6 +142,8 @@ def call(ges, mp_image: mp.Image, timestamp_ms: int):
         # print(open_init)
         calcy(ges.gestures[mouse_hand][0].category_name, thumb_tip, index_tip, middle_tip, ring_tip, pinky_tip,
          hand_world, hand.hand_world_landmarks[mouse_hand], ges.handedness, ges)
+        if util_hand == 0 or util_hand == 1:
+            calca(hand.hand_landmarks[util_hand], hand.hand_world_landmarks[util_hand], ges)
 
     except Exception as e:
         if init_code[0] > 0:
@@ -160,6 +202,7 @@ def call_face(face: FaceLandmarkerResult, mp_image: mp.Image, timestamp_ms: int)
 
 def track():
     global open_init
+
     BaseOptions = mp.tasks.BaseOptions
     GestureRecognizer = mp.tasks.vision.GestureRecognizer
     GestureRecognizerOptions = mp.tasks.vision.GestureRecognizerOptions

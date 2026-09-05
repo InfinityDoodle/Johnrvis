@@ -72,7 +72,7 @@ def mouse_control(ges, thumb, index, middle, ring, pinky, world, landmarks, palm
     thumb_to_index = distance_2d(thumb_world.x, thumb_world.y, index_mid.x, index_mid.y,)
     #print(thumb_to_index)
     scaled_d = size_scale(world)
-    print(thumb_to_index)
+    #print(thumb_to_index)
     if thumb_to_index <= .008*scaled_d  and mouse_Down >= 5 and palm and win32api.GetKeyState(0x01)>=0:
         mouse_Down = 0
         pyautogui.mouseDown(button="left")
@@ -174,13 +174,16 @@ def hand_choice(full_ges):
     #s.gestures[mouse_hand]) + " " + str(util_hand))
     return[mouse_hand, util_hand]
 
-def detect_palm(handedness, world):
+def detect_palm(handedness, world, hand_num_override=None):
     global mouse_hand
-    hand = 0
-    if handedness[mouse_hand][0].category_name == "Right":
+    if hand_num_override == None:
         hand = 0
+        if handedness[mouse_hand][0].category_name == "Right":
+            hand = 0
+        else:
+            hand = 1
     else:
-        hand = 1
+        hand = hand_num_override
     #wrist is really base pinky
     wrist = world[17]
     thumb_base = world[1]

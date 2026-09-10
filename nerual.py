@@ -14,9 +14,12 @@ import audio_synth
 from mediapipe.tasks.python.vision.face_landmarker import FaceLandmarkerResult
 from multiprocessing import Process, Event, Queue
 import asyncio
-
+import atexit
 import calc
+from RealtimeSTT import AudioToTextRecorder
+import multiprocessing
 import win32api
+import queue
 pyautogui.FAILSAFE = False
 pyautogui.PAUSE = .01
 
@@ -34,17 +37,31 @@ global lock
 lock = threading.Lock()
 global draw_face_landmarks
 draw_face_landmarks = []
-global gemma_opened
-gemma_opened = False
 global mouse_avg
 mouse_avg = []
 global last_pointer
 last_pointer = [0, 0]
-import atexit
+global recorder
+global event_recorder
+global close_recorder
+global queue_recorder
+
+if __name__ == '__main__':
+    event_recorder = threading.Event()
+    close_recorder = threading.Event()
+    queue_recorder = queue.Queue()
+    recorder = threading.Thread(target=audio_synth.set_up_recorder, args=(event_recorder, close_recorder, queue_recorder))
+
+    recorder.start()
+    close_recorder.clear()
+    event_recorder.clear()
 
 def cleanup():
-    clean = threading.Thread(target=calc_left.close_gemma)
-    clean.start()
+    global recorder
+    global event_recorder
+    global close_recorder
+
+    close_recorder.set()
 
 atexit.register(cleanup)
 
@@ -64,16 +81,7 @@ def calcy(ges, thumb, index, middle, ring, pinky, world, landmarks, handedness, 
     global last_pointer
     global mouse_avg
     global lock
-    global gemma_opened
 
-    if not gemma_opened and open_init[0]:
-        gemma_opened = True
-        gemma = threading.Thread(target=calc_left.start_gemma)
-        gemma.start()
-    if gemma_opened and not open_init[0]:
-        gemma_opened = False
-        gemma = threading.Thread(target=calc_left.close_gemma)
-        gemma.start()
 
     open_init, init_code = calc.password(ges, thumb, index, middle, ring, pinky, init_code)
     mouse_hand, util_hand = calc.hand_choice(full_ges)
@@ -82,21 +90,39 @@ def calcy(ges, thumb, index, middle, ring, pinky, world, landmarks, handedness, 
         last_pointer, mouse_avg, lock = calc.mouse_control(ges, thumb, index, middle, ring, pinky, world, landmarks, palm, full_ges, last_pointer, mouse_avg, lock)
 
 def calca(landmarks, world, full_ges):
+    global recorder
+    global recorder
+    global event_recorder
+    global close_recorder
+    global queue_recorder
     palm_left = calc.detect_palm(None, world, util_hand)
     palm_right = calc.detect_palm(None, full_ges.hand_world_landmarks[mouse_hand], mouse_hand)
     toolkit_init = calc_left.toolkit_active(full_ges.hand_world_landmarks[mouse_hand])
     if palm_left and toolkit_init and palm_right:
         finger_option = calc_left.pick_tool(world)
         if finger_option == "index":
-            print("speak")
-            speak_thread = threading.Thread(calc_left.speak())
-            speak_thread.start()
-        elif finger_option == "middle":
+            event_recorder.set()
+        else:
+            event_recorder.clear()
+            try:
+                if queue_recorder.not_empty:
+                    print(queue_recorder.get_nowait())
+            except:
+                pass
+
+        if finger_option == "middle":
             pass
         if finger_option == "ring":
             calc_left.right_click("down")
         elif win32api.GetKeyState(0x02)<0:
             calc_left.right_click("up")
+    else:
+        event_recorder.clear()
+        try:
+            if queue_recorder.not_empty:
+                print(queue_recorder.get_nowait())
+        except:
+            pass
 
 def call(ges, mp_image: mp.Image, timestamp_ms: int):
     global t

@@ -8,7 +8,6 @@ import pyautogui
 import audio_synth
 import asyncio
 import threading
-import pygame
 
 #thumb_tip = hand.hand_landmarks[0][4]
 #index_tip = hand.hand_landmarks[0][8]
@@ -16,19 +15,6 @@ import pygame
 #ring_tip = hand.hand_landmarks[0][16]
 #pinky_tip = hand.hand_landmarks[0][20]
 
-def start_gemma():
-    audio_synth.gemma_init()
-    audio_synth.gemma_load_into_ram()
-
-def close_gemma():
-    audio_synth.gemma_close()
-
-def speak():
-    message = audio_synth.speak()
-    print(message)
-    audio_synth.call_ollama(message)
-    print(message)
-    return message
 
 
 def toolkit_active(world: list[Landmark]):

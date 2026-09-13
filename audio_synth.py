@@ -1,3 +1,4 @@
+import pyautogui
 from RealtimeSTT import AudioToTextRecorder
 from ollama import ChatResponse
 from ollama import chat
@@ -40,10 +41,12 @@ def gemma_init():
 def gemma_load_into_ram():
     call_ollama("test", queue.Queue())
 
-def set_up_recorder(e, close, queuequeue):
+def set_up_recorder(e, close, queuequeue, ai_recorder):
     global recorder
     global input_text
     recorder = AudioToTextRecorder(realtime_model_type="base")
+    recorder.text(process_text)
+    recorder.stop()
     gemma_init()
     gemma_load_into_ram()
     input_text = ""
@@ -56,6 +59,10 @@ def set_up_recorder(e, close, queuequeue):
             ollama = threading.Thread(target=call_ollama, args=[input_text, ollama_queue])
             ollama.start()
             input_text = ollama_queue.get()
+            if not ai_recorder:
+                pyautogui.typewrite(input_text)
+            else:
+                pass
             queuequeue.put(input_text)
             input_text = ""
         time.sleep(.05)

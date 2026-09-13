@@ -45,15 +45,18 @@ global recorder
 global event_recorder
 global close_recorder
 global queue_recorder
+global ai_recorder
 
 if __name__ == '__main__':
     event_recorder = threading.Event()
     close_recorder = threading.Event()
     queue_recorder = queue.Queue()
-    recorder = threading.Thread(target=audio_synth.set_up_recorder, args=(event_recorder, close_recorder, queue_recorder))
+    ai_recorder = threading.Event()
+    recorder = threading.Thread(target=audio_synth.set_up_recorder, args=(event_recorder, close_recorder, queue_recorder, ai_recorder))
 
     recorder.start()
     close_recorder.clear()
+    ai_recorder.clear()
     event_recorder.clear()
 
 def cleanup():
@@ -95,6 +98,7 @@ def calca(landmarks, world, full_ges):
     global event_recorder
     global close_recorder
     global queue_recorder
+    global ai_recorder
     palm_left = calc.detect_palm(None, world, util_hand)
     palm_right = calc.detect_palm(None, full_ges.hand_world_landmarks[mouse_hand], mouse_hand)
     toolkit_init = calc_left.toolkit_active(full_ges.hand_world_landmarks[mouse_hand])
@@ -104,6 +108,7 @@ def calca(landmarks, world, full_ges):
             event_recorder.set()
         else:
             event_recorder.clear()
+            ai_recorder.clear()
             try:
                 if queue_recorder.not_empty:
                     print(queue_recorder.get_nowait())

@@ -59,7 +59,7 @@ def set_up_recorder(e, close, queuequeue, ai_recorder):
             ollama = threading.Thread(target=call_ollama, args=[input_text, ollama_queue])
             ollama.start()
             input_text = ollama_queue.get()
-            if not ai_recorder:
+            if not ai_recorder.is_set():
                 pyautogui.typewrite(input_text)
             else:
                 pass

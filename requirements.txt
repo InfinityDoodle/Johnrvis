@@ -3,6 +3,5 @@ mediapipe
 ollama
 opencv-python
 PyAutoGUI
-pywin32
 RealtimeSTT
 Shapely

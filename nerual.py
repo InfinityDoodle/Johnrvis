@@ -16,6 +16,7 @@ from multiprocessing import Process, Event, Queue
 import asyncio
 import atexit
 import calc
+import face_tracking
 from RealtimeSTT import AudioToTextRecorder
 import multiprocessing
 import win32api
@@ -175,6 +176,8 @@ def call(ges, mp_image: mp.Image, timestamp_ms: int):
          hand_world, hand.hand_world_landmarks[mouse_hand], ges.handedness, ges)
         if util_hand == 0 or util_hand == 1:
             calca(hand.hand_landmarks[util_hand], hand.hand_world_landmarks[util_hand], ges)
+        else:
+            event_recorder.clear()
 
     except Exception as e:
         if init_code[0] > 0:
@@ -192,7 +195,18 @@ def call(ges, mp_image: mp.Image, timestamp_ms: int):
 
         try:
             eye_landmarks = []
-            for x in draw_face_landmarks[0][468:477]:
+            eye_important_landmarks = [draw_face_landmarks[0][33],   # Outer corner
+        draw_face_landmarks[0][133],  # Inner corner
+        draw_face_landmarks[0][159],  # Upper eyelid
+        draw_face_landmarks[0][145],  # Lower eyelid
+        draw_face_landmarks[0][468],  # Iris center
+       draw_face_landmarks[0][263],  # Outer corner
+       draw_face_landmarks[0][362],  # Inner corner
+       draw_face_landmarks[0][386],  # Upper eyelid
+       draw_face_landmarks[0][374],  # Lower eyelid
+       draw_face_landmarks[0][473],  # Iris center
+            ]
+            for x in eye_important_landmarks:
                 eye_landmarks.append(x)
             mp.tasks.vision.drawing_utils.draw_landmarks(frame, eye_landmarks)
         except Exception as e:
@@ -213,20 +227,22 @@ def call(ges, mp_image: mp.Image, timestamp_ms: int):
 def call_face(face: FaceLandmarkerResult, mp_image: mp.Image, timestamp_ms: int):
     #print(face)
     global draw_face_landmarks
+    # LEFT EYE INDICES
+    # 33: Outer corner
+    # 133: Inner corner
+    # 159: Upper eyelid top
+    # 145: Lower eyelid bottom
+    # 468: Iris center
+    #
+    # RIGHT EYE INDICES
+    # 263: Outer corner
+    # 362: Inner corner
+    # 386: Upper eyelid top
+    # 374: Lower eyelid bottom
+    # 473: Iris center
 
-    # LEFT IRIS (Indices 468 - 472)
-    # 468: Left Eye Pupil / Iris Center
-    # 469: Left Iris Inner / Right Boundary (towards the nose)
-    # 470: Left Iris Upper / Top Boundary
-    # 471: Left Iris Outer / Left Boundary (towards the temple)
-    # 472: Left Iris Lower / Bottom Boundary
-
-    # RIGHT IRIS (Indices 473 - 477)
-    # 473: Right Eye Pupil / Iris Center
-    # 474: Right Iris Inner / Left Boundary (towards the nose)
-    # 475: Right Iris Upper / Top Boundary
-    # 476: Right Iris Outer / Right Boundary (towards the temple)
-    # 477: Right Iris Lower / Bottom Boundary
+    eye = face_tracking.calc_eye_tracking(face, mp_image)
+    #print(eye)
 
     draw_face_landmarks = face.face_landmarks
 

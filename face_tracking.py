@@ -67,7 +67,6 @@ def calc_eye_tracking(face_all: FaceLandmarkerResult, image):
     left_upper_cords = [[x/2, y]]
     left_lower_cords = [[x/2, 0]]
 
-    print(f"{outer_right}, {inner_right}, {upper_right}, {lower_right}")
 
     l1 = line_from_angle(right_outer_cords[0][0], right_outer_cords[0][1], -outer_right, -1, 1)
 
@@ -107,7 +106,6 @@ def calc_eye_tracking(face_all: FaceLandmarkerResult, image):
     avg_x = 0
     avg_y = 0
     count = 0
-    print((intersections[0].xy[0][0]))
     for intersection in intersections:
         savex = avg_x
         savey = avg_y
@@ -117,11 +115,23 @@ def calc_eye_tracking(face_all: FaceLandmarkerResult, image):
             avg_y += float(intersection.xy[1][0])
             count += 1
         except:
-            avg_x = avg_x
-            avg_y = avg_y
+            avg_x = savex
+            avg_y = savey
             count = savecount
 
     avg_intersection = [avg_x/count, avg_y/count]
+
+
+    multi = 5
+
+    print(face[468].z)
+    print(face[473].z)
+
+    if avg_intersection[0] >= x/2:
+        avg_intersection[0] = ((avg_intersection[0]-(x/2))*multi)+avg_intersection[0]
+    else:
+        avg_intersection[0] = avg_intersection[0]-(((x/2)-avg_intersection[0])*multi)
+
 
 
     AIMAKETESTCODE.update_eye_debug_plot(

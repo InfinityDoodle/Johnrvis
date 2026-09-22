@@ -5824,3 +5824,205 @@ ModuleNotFoundError: No module named 'onnxruntime'
 2026-09-18 23:40:39.164 - RealTimeSTT: realtimestt - DEBUG - RealtimeSTT initialization completed successfully
 2026-09-18 23:41:24.358 - RealTimeSTT: realtimestt - DEBUG - Receive from stdout pipe
 2026-09-18 23:41:24.358 - RealTimeSTT: realtimestt - INFO - None
+2026-09-21 20:14:28.787 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2026-09-21 20:14:28.882 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2026-09-21 20:14:28.924 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 3
+2026-09-21 20:14:28.924 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2026-09-21 20:14:29.405 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully with backend raw_onnx_ifless
+2026-09-21 20:14:29.417 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2026-09-21 20:14:29.417 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2026-09-21 20:14:29.417 - RealTimeSTT: realtimestt - DEBUG - Realtime transcription disabled; realtime worker exits
+2026-09-21 20:14:52.065 - RealTimeSTT: realtimestt - DEBUG - Main transcription model ready
+2026-09-21 20:14:52.067 - RealTimeSTT: realtimestt - DEBUG - RealtimeSTT initialization completed successfully
+2026-09-21 20:18:43.853 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2026-09-21 20:18:43.907 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2026-09-21 20:18:43.946 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 3
+2026-09-21 20:18:43.946 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2026-09-21 20:18:44.109 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully with backend raw_onnx_ifless
+2026-09-21 20:18:44.115 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2026-09-21 20:18:44.115 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2026-09-21 20:18:44.115 - RealTimeSTT: realtimestt - DEBUG - Realtime transcription disabled; realtime worker exits
+2026-09-21 20:19:00.882 - RealTimeSTT: realtimestt - DEBUG - Main transcription model ready
+2026-09-21 20:19:00.883 - RealTimeSTT: realtimestt - DEBUG - RealtimeSTT initialization completed successfully
+2026-09-21 20:19:11.625 - RealTimeSTT: realtimestt - DEBUG - Receive from stdout pipe
+2026-09-21 20:19:11.626 - RealTimeSTT: realtimestt - INFO - None
+2026-09-21 20:19:49.380 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2026-09-21 20:19:49.438 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2026-09-21 20:19:49.477 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 3
+2026-09-21 20:19:49.477 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2026-09-21 20:19:49.613 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully with backend raw_onnx_ifless
+2026-09-21 20:19:49.617 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2026-09-21 20:19:49.617 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2026-09-21 20:19:49.617 - RealTimeSTT: realtimestt - DEBUG - Realtime transcription disabled; realtime worker exits
+2026-09-21 20:20:06.502 - RealTimeSTT: realtimestt - DEBUG - Main transcription model ready
+2026-09-21 20:20:06.503 - RealTimeSTT: realtimestt - DEBUG - RealtimeSTT initialization completed successfully
+2026-09-21 20:24:24.514 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2026-09-21 20:24:24.567 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2026-09-21 20:24:24.601 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 3
+2026-09-21 20:24:24.601 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2026-09-21 20:24:24.740 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully with backend raw_onnx_ifless
+2026-09-21 20:24:24.744 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2026-09-21 20:24:24.745 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2026-09-21 20:24:24.745 - RealTimeSTT: realtimestt - DEBUG - Realtime transcription disabled; realtime worker exits
+2026-09-21 20:24:41.352 - RealTimeSTT: realtimestt - DEBUG - Main transcription model ready
+2026-09-21 20:24:41.353 - RealTimeSTT: realtimestt - DEBUG - RealtimeSTT initialization completed successfully
+2026-09-21 20:25:02.682 - RealTimeSTT: realtimestt - DEBUG - Receive from stdout pipe
+2026-09-21 20:25:02.682 - RealTimeSTT: realtimestt - INFO - None
+2026-09-21 20:26:26.556 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2026-09-21 20:26:26.618 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2026-09-21 20:26:26.683 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 3
+2026-09-21 20:26:26.684 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2026-09-21 20:26:26.848 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully with backend raw_onnx_ifless
+2026-09-21 20:26:26.852 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2026-09-21 20:26:26.852 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2026-09-21 20:26:26.852 - RealTimeSTT: realtimestt - DEBUG - Realtime transcription disabled; realtime worker exits
+2026-09-21 20:26:43.851 - RealTimeSTT: realtimestt - DEBUG - Main transcription model ready
+2026-09-21 20:26:43.853 - RealTimeSTT: realtimestt - DEBUG - RealtimeSTT initialization completed successfully
+2026-09-21 20:28:37.688 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2026-09-21 20:28:37.751 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2026-09-21 20:28:37.792 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 3
+2026-09-21 20:28:37.793 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2026-09-21 20:28:37.956 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully with backend raw_onnx_ifless
+2026-09-21 20:28:37.962 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2026-09-21 20:28:37.962 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2026-09-21 20:28:37.962 - RealTimeSTT: realtimestt - DEBUG - Realtime transcription disabled; realtime worker exits
+2026-09-21 20:28:54.976 - RealTimeSTT: realtimestt - DEBUG - Main transcription model ready
+2026-09-21 20:28:54.981 - RealTimeSTT: realtimestt - DEBUG - RealtimeSTT initialization completed successfully
+2026-09-21 20:30:55.838 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2026-09-21 20:30:55.901 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2026-09-21 20:30:55.955 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 3
+2026-09-21 20:30:55.956 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2026-09-21 20:30:56.102 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully with backend raw_onnx_ifless
+2026-09-21 20:30:56.109 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2026-09-21 20:30:56.110 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2026-09-21 20:30:56.110 - RealTimeSTT: realtimestt - DEBUG - Realtime transcription disabled; realtime worker exits
+2026-09-21 20:31:12.725 - RealTimeSTT: realtimestt - DEBUG - Main transcription model ready
+2026-09-21 20:31:12.743 - RealTimeSTT: realtimestt - DEBUG - RealtimeSTT initialization completed successfully
+2026-09-21 20:32:43.892 - RealTimeSTT: realtimestt - DEBUG - Receive from stdout pipe
+2026-09-21 20:32:43.893 - RealTimeSTT: realtimestt - INFO - None
+2026-09-21 20:36:15.428 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2026-09-21 20:36:15.480 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2026-09-21 20:36:15.518 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 3
+2026-09-21 20:36:15.518 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2026-09-21 20:36:15.652 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully with backend raw_onnx_ifless
+2026-09-21 20:36:15.656 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2026-09-21 20:36:15.657 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2026-09-21 20:36:15.657 - RealTimeSTT: realtimestt - DEBUG - Realtime transcription disabled; realtime worker exits
+2026-09-21 20:36:31.934 - RealTimeSTT: realtimestt - DEBUG - Main transcription model ready
+2026-09-21 20:36:31.936 - RealTimeSTT: realtimestt - DEBUG - RealtimeSTT initialization completed successfully
+2026-09-21 20:36:35.584 - RealTimeSTT: realtimestt - DEBUG - Receive from stdout pipe
+2026-09-21 20:36:35.586 - RealTimeSTT: realtimestt - INFO - None
+2026-09-21 20:39:33.895 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2026-09-21 20:39:33.947 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2026-09-21 20:39:33.990 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 3
+2026-09-21 20:39:33.990 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2026-09-21 20:39:34.155 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully with backend raw_onnx_ifless
+2026-09-21 20:39:34.159 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2026-09-21 20:39:34.159 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2026-09-21 20:39:34.160 - RealTimeSTT: realtimestt - DEBUG - Realtime transcription disabled; realtime worker exits
+2026-09-21 20:39:51.232 - RealTimeSTT: realtimestt - DEBUG - Main transcription model ready
+2026-09-21 20:39:51.233 - RealTimeSTT: realtimestt - DEBUG - RealtimeSTT initialization completed successfully
+2026-09-21 20:41:09.859 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2026-09-21 20:41:09.909 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2026-09-21 20:41:09.946 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 3
+2026-09-21 20:41:09.947 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2026-09-21 20:41:10.098 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully with backend raw_onnx_ifless
+2026-09-21 20:41:10.104 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2026-09-21 20:41:10.104 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2026-09-21 20:41:10.105 - RealTimeSTT: realtimestt - DEBUG - Realtime transcription disabled; realtime worker exits
+2026-09-21 20:41:26.619 - RealTimeSTT: realtimestt - DEBUG - Main transcription model ready
+2026-09-21 20:41:26.621 - RealTimeSTT: realtimestt - DEBUG - RealtimeSTT initialization completed successfully
+2026-09-21 20:41:39.141 - RealTimeSTT: realtimestt - DEBUG - Receive from stdout pipe
+2026-09-21 20:41:39.142 - RealTimeSTT: realtimestt - INFO - None
+2026-09-21 20:42:45.354 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2026-09-21 20:42:45.412 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2026-09-21 20:42:45.452 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 3
+2026-09-21 20:42:45.452 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2026-09-21 20:42:45.613 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully with backend raw_onnx_ifless
+2026-09-21 20:42:45.617 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2026-09-21 20:42:45.617 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2026-09-21 20:42:45.617 - RealTimeSTT: realtimestt - DEBUG - Realtime transcription disabled; realtime worker exits
+2026-09-21 20:43:02.674 - RealTimeSTT: realtimestt - DEBUG - Main transcription model ready
+2026-09-21 20:43:02.676 - RealTimeSTT: realtimestt - DEBUG - RealtimeSTT initialization completed successfully
+2026-09-21 20:43:36.857 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2026-09-21 20:43:36.917 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2026-09-21 20:43:36.959 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 3
+2026-09-21 20:43:36.960 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2026-09-21 20:43:37.111 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully with backend raw_onnx_ifless
+2026-09-21 20:43:37.115 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2026-09-21 20:43:37.115 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2026-09-21 20:43:37.115 - RealTimeSTT: realtimestt - DEBUG - Realtime transcription disabled; realtime worker exits
+2026-09-21 20:43:53.952 - RealTimeSTT: realtimestt - DEBUG - Main transcription model ready
+2026-09-21 20:43:53.953 - RealTimeSTT: realtimestt - DEBUG - RealtimeSTT initialization completed successfully
+2026-09-21 20:45:37.539 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2026-09-21 20:45:37.594 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2026-09-21 20:45:37.632 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 3
+2026-09-21 20:45:37.633 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2026-09-21 20:45:37.767 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully with backend raw_onnx_ifless
+2026-09-21 20:45:37.771 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2026-09-21 20:45:37.772 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2026-09-21 20:45:37.772 - RealTimeSTT: realtimestt - DEBUG - Realtime transcription disabled; realtime worker exits
+2026-09-21 20:45:55.762 - RealTimeSTT: realtimestt - DEBUG - Main transcription model ready
+2026-09-21 20:45:55.764 - RealTimeSTT: realtimestt - DEBUG - RealtimeSTT initialization completed successfully
+2026-09-21 20:46:51.303 - RealTimeSTT: realtimestt - DEBUG - Receive from stdout pipe
+2026-09-21 20:46:51.303 - RealTimeSTT: realtimestt - INFO - None
+2026-09-21 20:47:15.549 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2026-09-21 20:47:15.617 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2026-09-21 20:47:15.659 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 3
+2026-09-21 20:47:15.659 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2026-09-21 20:47:15.811 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully with backend raw_onnx_ifless
+2026-09-21 20:47:15.816 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2026-09-21 20:47:15.816 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2026-09-21 20:47:15.816 - RealTimeSTT: realtimestt - DEBUG - Realtime transcription disabled; realtime worker exits
+2026-09-21 20:47:45.588 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2026-09-21 20:47:45.642 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2026-09-21 20:47:45.686 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 3
+2026-09-21 20:47:45.686 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2026-09-21 20:47:45.843 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully with backend raw_onnx_ifless
+2026-09-21 20:47:45.847 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2026-09-21 20:47:45.847 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2026-09-21 20:47:45.847 - RealTimeSTT: realtimestt - DEBUG - Realtime transcription disabled; realtime worker exits
+2026-09-21 20:48:02.493 - RealTimeSTT: realtimestt - DEBUG - Main transcription model ready
+2026-09-21 20:48:02.494 - RealTimeSTT: realtimestt - DEBUG - RealtimeSTT initialization completed successfully
+2026-09-21 20:48:29.135 - RealTimeSTT: realtimestt - DEBUG - Receive from stdout pipe
+2026-09-21 20:48:29.135 - RealTimeSTT: realtimestt - INFO - None
+2026-09-21 20:48:43.084 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2026-09-21 20:48:43.142 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2026-09-21 20:48:43.182 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 3
+2026-09-21 20:48:43.183 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2026-09-21 20:48:43.327 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully with backend raw_onnx_ifless
+2026-09-21 20:48:43.332 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2026-09-21 20:48:43.332 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2026-09-21 20:48:43.332 - RealTimeSTT: realtimestt - DEBUG - Realtime transcription disabled; realtime worker exits
+2026-09-21 20:51:53.175 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2026-09-21 20:51:53.234 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2026-09-21 20:51:53.277 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 3
+2026-09-21 20:51:53.277 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2026-09-21 20:51:53.432 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully with backend raw_onnx_ifless
+2026-09-21 20:51:53.436 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2026-09-21 20:51:53.436 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2026-09-21 20:51:53.436 - RealTimeSTT: realtimestt - DEBUG - Realtime transcription disabled; realtime worker exits
+2026-09-21 20:52:09.785 - RealTimeSTT: realtimestt - DEBUG - Main transcription model ready
+2026-09-21 20:52:09.786 - RealTimeSTT: realtimestt - DEBUG - RealtimeSTT initialization completed successfully
+2026-09-21 20:58:36.339 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2026-09-21 20:58:36.395 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2026-09-21 20:58:36.435 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 3
+2026-09-21 20:58:36.435 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2026-09-21 20:58:36.573 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully with backend raw_onnx_ifless
+2026-09-21 20:58:36.577 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2026-09-21 20:58:36.578 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2026-09-21 20:58:36.578 - RealTimeSTT: realtimestt - DEBUG - Realtime transcription disabled; realtime worker exits
+2026-09-21 20:58:52.376 - RealTimeSTT: realtimestt - DEBUG - Main transcription model ready
+2026-09-21 20:58:52.390 - RealTimeSTT: realtimestt - DEBUG - RealtimeSTT initialization completed successfully
+2026-09-22 14:11:02.754 - RealTimeSTT: realtimestt - INFO - Starting RealTimeSTT
+2026-09-22 14:11:02.852 - RealTimeSTT: realtimestt - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2026-09-22 14:11:02.891 - RealTimeSTT: realtimestt - INFO - Initializing WebRTC voice with Sensitivity 3
+2026-09-22 14:11:02.892 - RealTimeSTT: realtimestt - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2026-09-22 14:11:03.404 - RealTimeSTT: realtimestt - DEBUG - Silero VAD voice activity detection engine initialized successfully with backend raw_onnx_ifless
+2026-09-22 14:11:03.606 - RealTimeSTT: realtimestt - DEBUG - Starting realtime worker
+2026-09-22 14:11:03.606 - RealTimeSTT: realtimestt - DEBUG - Waiting for main transcription model to start
+2026-09-22 14:11:03.606 - RealTimeSTT: realtimestt - DEBUG - Realtime transcription disabled; realtime worker exits
+2026-09-22 14:11:23.681 - RealTimeSTT: realtimestt - DEBUG - Main transcription model ready
+2026-09-22 14:11:23.687 - RealTimeSTT: realtimestt - DEBUG - RealtimeSTT initialization completed successfully
+2026-09-22 14:12:58.564 - RealTimeSTT: realtimestt - DEBUG - Receive from stdout pipe
+2026-09-22 14:12:58.564 - RealTimeSTT: realtimestt - INFO - None

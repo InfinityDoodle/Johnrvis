@@ -47,6 +47,8 @@ global event_recorder
 global close_recorder
 global queue_recorder
 global ai_recorder
+global ready_face
+ready_face = True
 
 if __name__ == '__main__':
     event_recorder = threading.Event()
@@ -227,6 +229,7 @@ def call(ges, mp_image: mp.Image, timestamp_ms: int):
 def call_face(face: FaceLandmarkerResult, mp_image: mp.Image, timestamp_ms: int):
     #print(face)
     global draw_face_landmarks
+    global ready_face
     # LEFT EYE INDICES
     # 33: Outer corner
     # 133: Inner corner
@@ -240,11 +243,18 @@ def call_face(face: FaceLandmarkerResult, mp_image: mp.Image, timestamp_ms: int)
     # 386: Upper eyelid top
     # 374: Lower eyelid bottom
     # 473: Iris center
-
-    eye = face_tracking.calc_eye_tracking(face, mp_image)
+    ready_face = False
+    try:
+        eye = face_tracking.calc_eye_tracking(face, mp_image)
+    except Exception as e:
+        ready_face = True
+        draw_face_landmarks = []
+        return
     #print(eye)
 
     draw_face_landmarks = face.face_landmarks
+
+    ready_face = True
 
 
 def track():
@@ -294,7 +304,9 @@ def track():
                 mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb_frame)
                 time_stamp = int(time.time()*100)
                 recognizer.recognize_async(mp_image, time_stamp)
-                detector.detect_async(mp_image, time_stamp)
+                if ready_face:
+                    detector.detect_async(mp_image, time_stamp)
+
                 if open_init[0]:
                     time.sleep(1/25)
                 else:

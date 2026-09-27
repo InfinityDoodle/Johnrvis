@@ -121,16 +121,46 @@ def calc_eye_tracking(face_all: FaceLandmarkerResult, image):
 
     avg_intersection = [avg_x/count, avg_y/count]
 
-
     multi = 5
 
-    print(face[468].z)
-    print(face[473].z)
+    #Chin tip 152
+    #Forehead center 10
+
+    print(face[468].z*1000)
+    print(face[473].z*1000)
+    left_eye_z=face[468].z*1000
+    right_eye_z=face[473].z*1000
+    upper_face_z=face[10].z*1000
+    lower_face_z=face[152].z*1000
+
+    face_vector = [0, 0]
+
+    face_vector[0] -= right_eye_z
+    face_vector[0] += left_eye_z
+    face_vector[1] += upper_face_z
+    face_vector[1] -= lower_face_z
+
+    face_vector[0] = face_vector[0]/10
+
+    if face_vector[0] >= 0:
+        multi_right = 2*abs(face_vector[0])
+        multi_left = 1/abs(face_vector[0])
+    else:
+        multi_right = 1/abs(face_vector[0])
+        multi_left = 2*abs(face_vector[0])
+
+    print(face_vector)
+
 
     if avg_intersection[0] >= x/2:
-        avg_intersection[0] = ((avg_intersection[0]-(x/2))*multi)+avg_intersection[0]
+        avg_intersection[0] = ((avg_intersection[0]-(x/2))*multi_right)+avg_intersection[0]
     else:
-        avg_intersection[0] = avg_intersection[0]-(((x/2)-avg_intersection[0])*multi)
+        avg_intersection[0] = avg_intersection[0]-(((x/2)-avg_intersection[0])*multi_left)
+
+    if avg_intersection[1] >= y/2:
+        avg_intersection[1] = ((avg_intersection[1]-(y/2))*multi)+avg_intersection[1]
+    else:
+        avg_intersection[1] = avg_intersection[1]-(((y/2)-avg_intersection[1])*multi)
 
 
 
